@@ -1,3 +1,10 @@
+// Reference
+// Google docs from Ri Liu:
+// https://docs.google.com/document/d/1LcdEOfaCbzTxrY8fMbcVBxqTY0UYgm2v0v4Oq8BURrQ/edit#
+
+// Isakiko's D3 for beginners
+// http://isakiko.github.io/D3-visualising-data/08-d3enter.html
+
 var dataUrl = "https://raw.githubusercontent.com/IsaKiko/D3-visualising-data/gh-pages/code/nations.json";
 
 d3.json(dataUrl, function(nations) {
