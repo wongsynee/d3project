@@ -16,4 +16,31 @@ d3.json(dataUrl, function(nations) {
 	frame.attr("width", frame_width);
 	frame.attr("height", frame_height);
 	canvas.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	// Create a logarithmic scale for the income
+	var xScale = d3.scale.log(); // income
+	xScale.domain([250, 1e5]); // set minimum and maximum value
+	xScale.range([0, canvas_width]); // set minimum and maximum range on the page
+
+	// Creating the x & y axes.
+	var xAxis = d3.svg.axis().orient("bottom").scale(xScale);
+
+	// Add the x-axis.
+	canvas.append("g")
+	    .attr("class", "x axis")
+	  .attr("transform", "translate(0," + canvas_height + ")")
+	  .call(xAxis);
+
+
+  	var data_canvas = canvas.append("g")
+	  .attr("class", "data_canvas");
+
+	var dot = data_canvas.selectAll(".dot")
+	  .data(nations, function(d){return d.name});
+
+	dot.enter().append("circle").attr("class","dot")
+	  .attr("cx", function(d) { return xScale(d.income[d.income.length-1]); })
+	  .attr("cy", function(d) { return yScale(d.lifeExpectancy[d.lifeExpectancy.length-1]); })
+	  .attr("r", 5);
+
 })
