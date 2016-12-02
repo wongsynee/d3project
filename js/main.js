@@ -23,19 +23,26 @@ d3.json(dataUrl, function(nations) {
 	xScale.range([0, canvas_width]); // set minimum and maximum range on the page
 
 	// Create a logarithmic scale for the income
-	var yScale = d3.scale.log(); // income
+	var yScale = d3.scale.linear(); // income
 	yScale.domain([10, 85]); // set minimum and maximum value
 	yScale.range([0, canvas_height]); // set minimum and maximum range on the page
 
+	var sqrt = d3.scale.log(); // income
+
 	// Creating the x & y axes.
 	var xAxis = d3.svg.axis().orient("bottom").scale(xScale);
-	var yAxis = d3.svg.axis().orient("bottom").scale(yScale);
+	var yAxis = d3.svg.axis().orient("left").scale(yScale);
 
 	// Add the x-axis.
 	canvas.append("g")
 	    .attr("class", "x axis")
 	  .attr("transform", "translate(0," + canvas_height + ")")
 	  .call(xAxis);
+
+  	canvas.append("g")
+	    .attr("class", "y axis")
+	  .attr("transform", "translate("+ canvas_width + ",0)")
+	  .call(yAxis);
 
 
   	var data_canvas = canvas.append("g")
